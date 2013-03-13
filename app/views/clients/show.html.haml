@@ -1,0 +1,55 @@
+.tabbable
+%ul.nav.nav-tabs
+  %li.active
+    %a(href="#tab1" data-toggle="tab") Client information
+  %li
+    %a(href="#tab2" data-toggle="tab") Messages
+.tab-content
+  #tab1.tab-pane.active
+    - model_class = Client
+    .page-header
+      %h1=t '.title', :default => model_class.model_name.human
+
+    %p
+      %strong= model_class.human_attribute_name(:name) + ':'
+      %br
+      = @client.name
+    %p
+      %strong= model_class.human_attribute_name(:phone) + ':'
+      %br
+      = @client.phone
+    %p
+      %strong= model_class.human_attribute_name(:city) + ':'
+      %br
+      = @client.city
+    %p
+      %strong= model_class.human_attribute_name(:account_balance) + ':'
+      %br
+      = @client.account_balance
+    %p
+      %strong= model_class.human_attribute_name(:advance_payment) + ':'
+      %br
+      = @client.advance_payment
+    %p
+      %strong= model_class.human_attribute_name(:total_amount_of_purchases) + ':'
+      %br
+      = @client.total_amount_of_purchases
+    %p
+      %strong= model_class.human_attribute_name(:is_wholesale_customer) + ':'
+      %br
+      = @client.is_wholesale_customer
+    %p
+      %strong= model_class.human_attribute_name(:remote_id) + ':'
+      %br
+      = @client.remote_id
+
+    .form-actions
+      = link_to t('.back', :default => t("helpers.links.back")), clients_path, :class => 'btn'
+      = link_to t('.edit', :default => t("helpers.links.edit")), edit_client_path(@client), :class => 'btn'
+      = link_to t('.destroy', :default => t("helpers.links.destroy")), client_path(@client), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  #tab2.tab-pane
+    =render :partial=>'shared/messages', :locals=>{:messages=>@client.messages}
+    =render :partial=>'shared/new_message', :locals=>{:message=>@client.messages.new}
+
+
+

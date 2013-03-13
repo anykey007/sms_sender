@@ -1,0 +1,8 @@
+%h3 Синхронизация
+- if @sync
+  %p
+    %strong Дата последней синхронизации
+    %br
+    = @sync.updated_at
+%p
+  = link_to 'Синхронизировать', settings_sync_path, :class => 'btn'  

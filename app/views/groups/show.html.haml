@@ -1,0 +1,32 @@
+.tabbable
+%ul.nav.nav-tabs
+  %li.active
+    %a(href="#tab1" data-toggle="tab") Group information
+  %li
+    %a(href="#tab2" data-toggle="tab") Messages
+.tab-content
+  #tab1.tab-pane.active
+    - model_class = Group
+    .page-header
+      %h1=t '.title', :default => model_class.model_name.human
+
+    %p
+      %strong= model_class.human_attribute_name(:name) + ':'
+      %br
+      = @group.name
+    %p
+      %strong= model_class.human_attribute_name(:description) + ':'
+      %br
+      = @group.description
+
+    .form-actions
+      = link_to 'Show clients', group_clients_path(@group), :class => 'btn'
+      = link_to t('.back', :default => t("helpers.links.back")), groups_path, :class => 'btn'
+      = link_to t('.edit', :default => t("helpers.links.edit")), edit_group_path(@group), :class => 'btn'
+      = link_to t('.destroy', :default => t("helpers.links.destroy")), group_path(@group), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  #tab2.tab-pane
+    =render :partial=>'shared/messages', :locals=>{:messages=>@group.messages}
+    =render :partial=>'shared/new_message', :locals=>{:message=>@group.messages.new}
+
+
+

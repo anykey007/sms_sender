@@ -1,0 +1,7 @@
+%h4 Сообщения
+.messages
+  - messages.each do |message|
+    .row
+      %span.span6= link_to message.text, message_path(message), :target=>'_blanck'
+      %span.span3= message.created_at.strftime('%d-%m-%Y %H:%M')
+      %span.span3= message.status

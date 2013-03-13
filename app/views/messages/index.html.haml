@@ -1,0 +1,21 @@
+- model_class = Message
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:text)
+      %th= model_class.human_attribute_name(:status)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @messages.each do |message|
+      %tr
+        %td= link_to message.text, message_path(message)
+        %td= message.status
+        %td= message.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_message_path(message), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), message_path(message), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_message_path, :class => 'btn btn-primary'

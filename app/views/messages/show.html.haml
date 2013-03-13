@@ -1,0 +1,62 @@
+- model_class = Message
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
+.tabbable
+%ul.nav.nav-tabs
+  %li.active
+    %a(href="#tab1" data-toggle="tab") Основная информация
+  %li
+    %a(href="#tab2" data-toggle="tab") Request
+  %li
+    %a(href="#tab3" data-toggle="tab") Response
+  %li
+    %a(href="#tab4" data-toggle="tab") Статусы сообщнения
+.tab-content
+  #tab1.tab-pane.active
+    %p
+      %strong= model_class.human_attribute_name(:campaign_id) + ':'
+      %br
+      = @message.campaign_id
+    %p
+      %strong= model_class.human_attribute_name(:text) + ':'
+      %br
+      = @message.text
+    %p
+      %strong= model_class.human_attribute_name(:messageble_id) + ':'
+      %br
+      = @message.messageble_id
+    %p
+      %strong= model_class.human_attribute_name(:messageble_type) + ':'
+      %br
+      = @message.messageble_type
+    %p
+      %strong= model_class.human_attribute_name(:status) + ':'
+      %br
+      = @message.status  
+    
+
+    .form-actions
+      = link_to t('.back', :default => t("helpers.links.back")), messages_path, :class => 'btn'
+      = link_to t('.edit', :default => t("helpers.links.edit")), edit_message_path(@message), :class => 'btn'
+      = link_to t('.destroy', :default => t("helpers.links.destroy")), message_path(@message), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  #tab2.tab-pane
+    %p
+      %strong= model_class.human_attribute_name(:request) + ':'
+      %br
+      =text_area_tag 'request', @message.request, :rows => 50, :style=>"width:80%;"
+  #tab3.tab-pane
+    %p
+      %strong= model_class.human_attribute_name(:response) + ':'
+      %br
+      =text_area_tag 'response', @message.response, :rows => 50, :style=>"width:80%;"
+  #tab4.tab-pane
+    // - Message::MESSAGE_STATUSES.each_pair do |key, value|
+    //   %p= "#{value} - #{@message.recipients_by_status(key).size}"
+    // - @message.recipients_status.each_pair do |key, value|
+    //   %p= "#{key} - #{Message::MESSAGE_STATUSES[value]}"
+
+
+
+
+
+

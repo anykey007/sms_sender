@@ -1,0 +1,9 @@
+:css
+  .mes_success{
+    background-color: #DFF0D8;border-color: #D6E9C6;color: #468847;
+  }
+
+.mes_success.row
+  %span.span6= link_to @message.text, message_path(@message), :target=>'_blanck'
+  %span.span3= @message.created_at.strftime('%d-%m-%Y %H:%M')
+  %span.span3= @message.status

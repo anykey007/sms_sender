@@ -1,0 +1,13 @@
+%h4 Новое сообщение
+= simple_form_for(message, :remote=>true) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :text, as: :text, 
+      :input_html => {:rows => 5, :style=>"width:80%;" }
+  .form-hidden-inputs
+    = f.input :messageble_id, as: :hidden
+    = f.input :messageble_type, as: :hidden
+
+  .form-actions
+    = f.button :submit
